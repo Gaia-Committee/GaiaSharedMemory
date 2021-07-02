@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.10)
 #==============================
 
 if (NOT PROJECT_DECLARED)
-    project("Gaia Shared Memory" LANGUAGES CXX)
+    project("Gaia Shared Memory" LANGUAGES CXX VERSION 0.9)
     set(PROJECT_DECLARED)
 endif()
 
