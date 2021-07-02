@@ -7,7 +7,7 @@ namespace Gaia::SharedMemory
     {
         boost::interprocess::shared_memory_object::remove(name.c_str());
         MemoryObject = std::make_unique<boost::interprocess::shared_memory_object>(
-                boost::interprocess::create_only, name.c_str(),
+                boost::interprocess::open_or_create, name.c_str(),
                 boost::interprocess::read_write);
         MemoryObject->truncate(size);
         MappedRegion = std::make_unique<boost::interprocess::mapped_region>(
