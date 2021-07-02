@@ -51,6 +51,14 @@ macro(find_hpp path list_name)
     endforeach()
 endmacro()
 
+# Macro for adding a custom module to a specific target.
+macro(add_custom_module target_name visibility module_name)
+    find_path(${module_name}_INCLUDE_DIRS "${module_name}")
+    find_library(${module_name}_LIBS "${module_name}")
+    target_include_directories(${target_name} ${visibility} ${${module_name}_INCLUDE_DIRS})
+    target_link_libraries(${target_name} ${visibility} ${${module_name}_LIBS})
+endmacro()
+
 #------------------------------
 # C++
 #------------------------------
@@ -71,15 +79,6 @@ add_library(${TARGET_NAME} SHARED ${TARGET_SOURCE} ${TARGET_HEADER})
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     target_compile_definitions(${TARGET_NAME} PRIVATE -DDEBUG)
 endif()
-
-#==============================
-# External Modules
-#==============================
-
-# Exception module of Gaia.
-target_link_libraries(${TARGET_NAME} PUBLIC "GaiaExceptions")
-# Byte utility module of Gaia
-target_link_libraries(${TARGET_NAME} PUBLIC "GaiaByteUtility")
 
 #==============================
 # Dependencies

@@ -19,12 +19,23 @@ namespace Gaia::SharedMemory
         MemoryObject.reset(nullptr);
     }
 
-    /// Get the pointer of the first byte of the shared memory and its total size.
-    ByteUtility::ConstBytesAddress ImageMemory::GetBytesAddress()
+    /// Get the address of this memory region.
+    char *ImageMemory::GetPointer() const
     {
-        Exceptions::AssertFailure::ThrowIfNot(MappedRegion.operator bool(),
-                                              "shared memory is open");
-        return ByteUtility::ConstBytesAddress(
-                static_cast<unsigned char const*>(MappedRegion->get_address()), MappedRegion->get_size());
+        if (MappedRegion.operator bool())
+        {
+            return static_cast<char*>(MappedRegion->get_address());
+        }
+        return nullptr;
+    }
+
+    /// Get the total size of this memory region.
+    std::size_t ImageMemory::GetSize() const
+    {
+        if (MappedRegion.operator bool())
+        {
+            return MappedRegion->get_size();
+        }
+        return 0;
     }
 }

@@ -42,13 +42,6 @@ namespace Gaia::SharedMemory
             return VariablePointer;
         }
 
-        /// Access the object pointed by the pointer as an object reference.
-        VariableType& Access()
-        {
-            Exceptions::NullPointerException::ThrowIfNull(VariablePointer, "VariablePointer");
-            return *VariablePointer;
-        }
-
         /// Access the member of the object if it's a pointer.
         template<typename = typename std::enable_if<std::is_pointer_v<VariableType>>>
         VariableType* operator->()

@@ -11,9 +11,10 @@ int main()
     source.Create("Test String", 60);
 
     std::string text;
+    std::cout << "Input text: ";
     std::cin >> text;
 
-    std::strcpy(reinterpret_cast<char *>(source.GetBytesAddress().Data), text.c_str());
+    std::strcpy(source.GetPointer(), text.c_str());
 
     char key;
     std::cin >> key;

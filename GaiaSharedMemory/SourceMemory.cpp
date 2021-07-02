@@ -33,18 +33,29 @@ namespace Gaia::SharedMemory
         }
     }
 
-    /// Get the pointer of the first byte of the shared memory and its total size.
-    ByteUtility::BytesAddress SourceMemory::GetBytesAddress()
-    {
-        Exceptions::AssertFailure::ThrowIfNot(MappedRegion.operator bool(),
-                                              "shared memory is open");
-        return ByteUtility::BytesAddress(
-                static_cast<unsigned char*>(MappedRegion->get_address()), MappedRegion->get_size());
-    }
-
     /// Destructor
     SourceMemory::~SourceMemory()
     {
         Delete();
+    }
+
+    /// Get the address of this memory region.
+    char *SourceMemory::GetPointer() const
+    {
+        if (MappedRegion)
+        {
+            return static_cast<char*>(MappedRegion->get_address());
+        }
+        return nullptr;
+    }
+
+    /// Get the total size of this memory region.
+    std::size_t SourceMemory::GetSize() const
+    {
+        if (MappedRegion)
+        {
+            return MappedRegion->get_size();
+        }
+        return 0;
     }
 }

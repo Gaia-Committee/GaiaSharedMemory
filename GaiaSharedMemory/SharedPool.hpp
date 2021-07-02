@@ -3,7 +3,6 @@
 #include <string>
 #include <memory>
 #include <boost/interprocess/managed_shared_memory.hpp>
-#include <GaiaExceptions/GaiaExceptions.hpp>
 
 namespace Gaia::SharedMemory
 {

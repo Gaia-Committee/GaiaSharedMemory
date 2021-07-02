@@ -5,9 +5,6 @@
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
 
-#include <GaiaByteUtility/GaiaByteUtility.hpp>
-#include <GaiaExceptions/GaiaExceptions.hpp>
-
 namespace Gaia::SharedMemory
 {
     /**
@@ -49,23 +46,9 @@ namespace Gaia::SharedMemory
          */
         void Clear();
 
-        /**
-         * @brief Get the pointer of the first byte of the shared memory and its total size.
-         * @return BytesAddress consists of its address and size.
-         */
-        ByteUtility::BytesAddress GetBytesAddress();
-
-        /**
-         * @brief Access the whole block as an object of a certain type.
-         * @tparam ObjectType The type to access as.
-         * @return Object reference.
-         */
-        template<typename ObjectType>
-        ObjectType& AccessAs()
-        {
-            Exceptions::AssertFailure::ThrowIfNot(MappedRegion.operator bool(),
-                                                  "shared memory is open");
-            return *static_cast<ObjectType*>(MappedRegion->get_address());
-        }
+        /// Get the pointer of this memory region.
+        [[nodiscard]] char* GetPointer() const;
+        /// Get the total size of this memory region.
+        [[nodiscard]] std::size_t GetSize() const;
     };
 }

@@ -9,7 +9,7 @@ int main()
     ImageMemory image;
     image.Open("Test String");
 
-    std::cout << image.GetBytesAddress().Data << std::endl;
+    std::cout << image.GetPointer() << std::endl;
 
     return 0;
 }
