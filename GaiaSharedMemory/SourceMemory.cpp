@@ -5,7 +5,6 @@ namespace Gaia::SharedMemory
     /// Create a piece of shared memory block.
     void SourceMemory::Create(const std::string &name, long size)
     {
-        boost::interprocess::shared_memory_object::remove(name.c_str());
         MemoryObject = std::make_unique<boost::interprocess::shared_memory_object>(
                 boost::interprocess::open_or_create, name.c_str(),
                 boost::interprocess::read_write);
