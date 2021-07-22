@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.10)
 # Project Settings
 #==============================
 
-set(TARGET_NAME "Background")
+set(TARGET_NAME "SharedMemory")
 set(TARGET_NAMESPACE "Gaia")
 set(TARGET_VERSION 0.9.0)
 
